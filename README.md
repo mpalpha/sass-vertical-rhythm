@@ -7,8 +7,6 @@ Author: Jason Lusk
 Author URI: http://JasonLusk.com  
 GIT URI: https://github.com/mpalpha/sass-vertical-rhythm.git  
 
-Tip: https://cash.me/$JasonLusk  
-
 ####DEMO <a href="http://www.jasonlusk.com/sass-vertical-rhythm" target="_blank">http://www.jasonlusk.com/sass-vertical-rhythm</a>
 
 #####Requirements:
