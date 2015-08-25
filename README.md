@@ -7,7 +7,7 @@ Author: Jason Lusk
 Author URI: http://JasonLusk.com  
 GIT URI: https://github.com/mpalpha/sass-vertical-rhythm.git  
 
-####DEMO <a href="http://www.jasonlusk.com/sass-vertical-rhythm" target="_blank">http://www.jasonlusk.com/sass-vertical-rhythm</a>
+####DEMO <a href="http://codepen.io/mpalpha/pen/QbeMMN" target="_blank">http://codepen.io/mpalpha/pen/QbeMMN</a>
 
 #####Requirements:
   SASS v3.2+ tested with libsass
