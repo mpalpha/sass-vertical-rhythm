@@ -1,0 +1,42 @@
+// type creator
+@each $type in map-keys($fontSizes) {
+  // get font size
+  $fontSize: map-get($fontSizes, $type);
+
+  // set type baseline padding
+  #{$type} {
+    // set font-size with px fallback
+    font-size: $fontSize + px;
+    font-size: rem($fontSize);
+
+    // set baseline spacing
+    @include vr($fontSize);
+
+    // add conversion classes
+    @each $tp in map-keys($fontSizes) {
+      // get font size
+      $fs: map-get($fontSizes, $tp);
+
+      @if $type != $tp and $fs < $fontSize {
+        // parse period if needed
+        @if str-index($tp, ".") != null {
+          $tp: str-slice($tp, 2);
+        }
+
+        // assign utility class
+        &.#{$tp} {
+          @include vr($fs, $from: $fontSize);
+
+          // set vertical center utility
+          &.v-center {
+            @include vr($fs, $from: $fontSize, $baseline: false);
+          }
+        }
+      }
+    }
+  }
+
+  .#{$type} {
+    @extend #{$type};
+  }
+}

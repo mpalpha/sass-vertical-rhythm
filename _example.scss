@@ -1,0 +1,28 @@
+// example scss
+html {
+  font-size: 1em;
+}
+
+body {
+  font-family: 'Roboto';
+
+  > * {
+    max-width: rem(600);
+    margin: 2% auto 0;
+  }
+
+  > div {
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: 2px;
+    background-image: linear-gradient(to bottom, rgba(254, 0, 0, 0.35) 0%, transparent 12%, transparent 49%, rgba(0, 254, 0, 0.65) 50%, transparent 60%, transparent 100%);
+    background-size: 100% rem($base-unit * 2);
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+
+    & > *:not(:last-child) {
+      width: 50%;
+      display: inline-block;
+      float: left;
+    }
+  }
+}

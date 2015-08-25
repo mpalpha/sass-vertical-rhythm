@@ -1,0 +1,42 @@
+// functions
+@function rem($val) {
+  // to rem
+  @return if(unit($val) == "px", $val / 1px, $val) / ($rem-base / 1px) + rem;
+}
+
+@function round-to($val, $unit) {
+  // round to the nearest specified number
+  @return round($val / $unit) * $unit;
+}
+
+@function vr-size($size) {
+  // round to the nearest base unit number
+  @return rem(ceil($size / $base-unit) * $base-unit);
+}
+
+// mixins
+@mixin vr($fontSize, $from: $fontSize, $baseline: true) {
+  // get nearest line-height to unit
+  $_lineHeight: round-to($fontSize * $line-height, $base-unit);
+
+  // get nearest line-height to unit offset
+  $_lineHeightOffset: round-to($from * $line-height, $base-unit) - $_lineHeight;
+
+  @if $fontSize < $from {
+    // child detect
+    @if $baseline {
+      // baseline vertical center
+      padding-top: rem(round($_lineHeightOffset * 2 / 3));
+      padding-bottom: rem(round($_lineHeightOffset / 3));
+    }
+    @else {
+      // line height vertical center
+      padding-top: rem(round($_lineHeightOffset / 2));
+      padding-bottom: rem(round($_lineHeightOffset / 2));
+    }
+  }
+  @else {
+    // set line-height including sub pixel
+    line-height: $_lineHeight / $fontSize + 0.0005;
+  }
+}
