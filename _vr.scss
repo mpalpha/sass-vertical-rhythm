@@ -15,7 +15,7 @@
 }
 
 // mixins
-@mixin vr($fontSize, $from: $fontSize, $baseline: true) {
+@mixin vr($fontSize, $from: $fontSize, $baseline: true, $border: 0) {
   // get nearest line-height to unit
   $_lineHeight: round-to($fontSize * $line-height, $base-unit);
 
@@ -25,14 +25,14 @@
   @if $fontSize < $from {
     // child detect
     @if $baseline {
-      // baseline vertical center
-      padding-top: rem(round($_lineHeightOffset * 2 / 3));
-      padding-bottom: rem(round($_lineHeightOffset / 3));
+      // baseline vertical baseline center
+      padding-top: rem(round($_lineHeightOffset * 2 / 3) - $border / 2);
+      padding-bottom: rem(round($_lineHeightOffset / 3) - $border / 2);
     }
     @else {
       // line height vertical center
-      padding-top: rem(round($_lineHeightOffset / 2));
-      padding-bottom: rem(round($_lineHeightOffset / 2));
+      padding-top: rem(round($_lineHeightOffset / 2) - $border / 2);
+      padding-bottom: rem(round($_lineHeightOffset / 2) - $border / 2);
     }
   }
   @else {
