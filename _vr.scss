@@ -24,11 +24,14 @@
 
   @if $fontSize < $from {
     // child baseline or vertical center
-    padding-top: rem(if($baseline, round($_lineHeightOffset * 2 / 3), round($_lineHeightOffset / 2)) - $border / 2);
-    padding-top: rem(if($baseline, round($_lineHeightOffset / 3), round($_lineHeightOffset / 2)) - $border / 2);
+    $baseline-ratio: if($baseline, 3, 2);
+    $baseline-offset: if($baseline, $_lineHeightOffset * 2, $_lineHeightOffset);
+
+    padding-top: rem(round($baseline-offset / $baseline-ratio) - $border / 2);
+    padding-bottom: rem(round($_lineHeightOffset / $baseline-ratio) - $border / 2);
   }
   @else {
-    // calculate line-height including sub pixel
+    // set line-height including partial pixel
     line-height: $_lineHeight / $fontSize + 0.0005;
   }
 }
