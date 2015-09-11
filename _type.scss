@@ -1,13 +1,22 @@
-// type creator
+/* begin type creator */
 @each $type in map-keys($fontSizes) {
+  $fontFace: "" !default;
+
+  // get font faces
+  @if variable-exists($fontFaces) {
+    @if map-has-key($fontFaces, $type) {
+      $fontFace: map-get($fontFaces, $type);
+    }
+  }
+
   // get font size
   $fontSize: map-get($fontSizes, $type);
 
   // set type baseline padding
   #{$type} {
-    // set font-size with px fallback
-    font-size: $fontSize + px;
-    font-size: rem($fontSize);
+    @if $fontFace != "" {
+      font-family: $fontFace;
+    }
 
     // set baseline spacing
     @include vr($fontSize);
@@ -18,12 +27,7 @@
       $fs: map-get($fontSizes, $tp);
 
       @if $type != $tp and $fs < $fontSize {
-        // parse period if needed
-        @if str-index($tp, ".") != null {
-          $tp: str-slice($tp, 2);
-        }
-
-        // assign utility class
+        // assign utility class and parse underscore
         &.#{$tp} {
           @include vr($fs, $from: $fontSize);
 
@@ -33,6 +37,11 @@
           }
         }
       }
+    }
+
+    // set vertical center to bottom utility
+    &.v-bottom {
+      transform: translateY($base-cap-height);
     }
   }
 

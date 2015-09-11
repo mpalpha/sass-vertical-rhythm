@@ -1,21 +1,59 @@
 // functions
-@function rem($val) {
-  // to rem
-  @return if(unit($val) == "px", $val / 1px, $val) / ($rem-base / 1px) + rem;
+// convert px to em
+@function em($px: 0, $font-size: $rem-base) {
+  @return $px / $font-size + em;
 }
 
-@function round-to($val, $unit) {
-  // round to the nearest specified number
+// convert unitless or px to rem
+@function rem($val) {
+  @if unit($val) == "px" or unitless($val) {
+    @return rem-calc($val);
+  }
+  @else if unit($val) == "rem" {
+    @return $val;
+  }
+  @else {
+    @warn "`#{$val}` is not a supported try a px or rem value";
+
+    @return false;
+  }
+}
+
+// convert rem to px
+@function px($val, $base: $rem-base) {
+  @if unitless($val) {
+    @return $val * 1px;
+  }
+
+  @if unit($val) == "px" {
+    @return $val;
+  }
+  @else if unit($val) == "rem" {
+    @return $val * $base / 1rem;
+  }
+  @else {
+    @warn "`#{$val}` is not a supported try a px or rem value";
+
+    @return false;
+  }
+}
+
+// find the nearest ceiling rem value to a baseline unit
+@function vr-size($val: 1px, $remove: 0px, $base-unit: rem($base-unit)) {
+  @return ceil(rem($val) / $base-unit) * $base-unit - rem($remove);
+}
+
+// round to the nearest specified number
+@function round-to($val, $unit: $base-unit) {
   @return round($val / $unit) * $unit;
 }
 
-@function vr-size($size) {
-  // round to the nearest base unit number
-  @return rem(ceil($size / $base-unit) * $base-unit);
-}
-
 // mixins
-@mixin vr($fontSize, $from: $fontSize, $baseline: true, $border: 0) {
+@mixin vr($fontSize, $from: $fontSize, $baseline: true, $border: 0, $line-height: $line-height) {
+  // convert to px as needed
+  $from: px($from);
+  $fontSize: px($fontSize);
+
   // get nearest line-height to unit
   $_lineHeight: round-to($fontSize * $line-height, $base-unit);
 
