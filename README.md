@@ -1,4 +1,4 @@
-##sass-vertical-rhythm
+## sass-vertical-rhythm
 
 Name: SASS vertical rhythm technique  
 Description: sass-vertical-rhythm is a technique used to create vertical ryhthm based on a base unit value.  
@@ -7,17 +7,17 @@ Author: Jason Lusk
 Author URI: http://JasonLusk.com  
 GIT URI: https://github.com/mpalpha/sass-vertical-rhythm.git  
 
-####DEMO <a href="http://codepen.io/mpalpha/pen/GpKGQo" target="_blank">http://codepen.io/mpalpha/pen/GpKGQo</a>
+#### DEMO <a href="http://codepen.io/mpalpha/pen/GpKGQo" target="_blank">http://codepen.io/mpalpha/pen/GpKGQo</a>
 
-#####Requirements:
+##### Requirements:
   SASS v3.2+ tested with libsass
 
-#####Use:
+##### Use:
 ```sass
     @include vr(16, 40, false);
 ```
 
-#####Configure:
+##### Configure:
 Available Options|Default value|Description
 -------------|-------------|-------------
 $fontSize|n/a|font size
